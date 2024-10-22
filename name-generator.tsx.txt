@@ -1,0 +1,72 @@
+import React, { useState } from 'react';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Sparkles } from 'lucide-react';
+
+const NameGenerator = () => {
+  const [generatedName, setGeneratedName] = useState('');
+  
+  const firstNames = [
+    'Luna', 'Atlas', 'Nova', 'Sage', 'Echo',
+    'River', 'Phoenix', 'Aurora', 'Storm', 'Sky',
+    'Rain', 'Azure', 'Ember', 'Dawn', 'Raven'
+  ];
+  
+  const lastNames = [
+    'Starling', 'Winters', 'Moonshadow', 'Rivers', 'Nightshade',
+    'Blackwood', 'Frost', 'Sterling', 'Drake', 'Wilde',
+    'Thorne', 'Gray', 'Rose', 'Stone', 'Woods'
+  ];
+  
+  const generateName = () => {
+    const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+    setGeneratedName(`${firstName} ${lastName}`);
+  };
+
+  return (
+    <Card className="w-full max-w-md mx-auto bg-gradient-to-br from-purple-50 to-blue-50">
+      <CardHeader className="relative pb-8">
+        <svg className="w-full h-32" viewBox="0 0 400 100">
+          <defs>
+            <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#9333EA" />
+              <stop offset="100%" stopColor="#3B82F6" />
+            </linearGradient>
+          </defs>
+          
+          {/* Decorative background shapes */}
+          <circle cx="50" cy="50" r="30" fill="url(#headerGradient)" opacity="0.2" />
+          <circle cx="350" cy="30" r="20" fill="url(#headerGradient)" opacity="0.2" />
+          <path d="M150 80 Q 200 20 250 80" stroke="url(#headerGradient)" fill="none" strokeWidth="2" />
+          
+          {/* Title text */}
+          <text x="200" y="60" textAnchor="middle" fill="url(#headerGradient)" 
+                className="text-2xl font-bold" style={{ fontSize: '24px' }}>
+            Mystical Name Generator
+          </text>
+        </svg>
+      </CardHeader>
+      
+      <CardContent className="flex flex-col items-center gap-6 pb-8">
+        <div className="text-center min-h-16">
+          {generatedName && (
+            <div className="text-2xl font-semibold text-purple-800">
+              {generatedName}
+            </div>
+          )}
+        </div>
+        
+        <Button
+          onClick={generateName}
+          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2 rounded-full flex items-center gap-2"
+        >
+          <Sparkles size={20} />
+          Generate Name
+        </Button>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default NameGenerator;
